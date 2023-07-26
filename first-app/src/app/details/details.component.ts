@@ -21,25 +21,25 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
         <p class="listing-location">{{housingLocation?.city}}, {{housingLocation?.state}}</p>
       </section>
       <section class="listing-features">
-        <h2 class="section-heading">About this housing location</h2>
+        <h2 class="section-heading" i18n>About this housing location</h2>
         <ul>
-          <li>Units available: {{housingLocation?.availableUnits}}</li>
-          <li>Does this location have wifi: {{housingLocation?.wifi}}</li>
-          <li>Does this location have laundry: {{housingLocation?.laundry}}</li>
+          <li i18n>Units available: {{housingLocation?.availableUnits}}</li>
+          <li i18n>Does this location have wifi: {{housingLocation?.wifi}}</li>
+          <li i18n>Does this location have laundry: {{housingLocation?.laundry}}</li>
         </ul>
       </section>
       <section class="listing-apply">
-        <h2 class="section-heading">Apply now to live here</h2>
+        <h2 class="section-heading" i18n>Apply now to live here</h2>
         <form [formGroup]="applyForm" (submit)="submitApplication()">
-          <label for="first-name">First Name</label>
+          <label for="first-name" i18n>First Name</label>
           <input id="first-name" type="text" formControlName="firstName">
 
-          <label for="last-name">Last Name</label>
+          <label for="last-name" i18n>Last Name</label>
           <input id="last-name" type="text" formControlName="lastName">
 
           <label for="email">Email</label>
           <input id="email" type="email" formControlName="email">
-          <button type="submit" class="primary">Apply now</button>
+          <button type="submit" class="primary" i18n>Apply now</button>
         </form>
       </section>
     </article>

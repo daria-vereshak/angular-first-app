@@ -14,8 +14,8 @@ import { HousingService } from '../housing.service';
   template: `
     <section>
       <form>
-        <input type="text" placeholder="Filter by city" #filter>
-        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+        <input type="text" placeholder="Filter by city" i18n-placeholder #filter>
+        <button class="primary" type="button" (click)="filterResults(filter.value)" i18n>Search</button>
       </form>
     </section>
     <section class="results">

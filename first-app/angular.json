@@ -4,6 +4,10 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular.io-example": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {"ru-RU": "src/locale/messages.ru.xlf"}
+      },
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -12,6 +16,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["en-US"],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
