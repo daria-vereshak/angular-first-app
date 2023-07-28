@@ -9,6 +9,8 @@ import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import routeConfig from './app/routes';
 
+import './elf-state'
+
 bootstrapApplication(AppComponent,
     {
       providers: [
