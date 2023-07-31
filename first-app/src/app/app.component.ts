@@ -4,11 +4,11 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [
-    HomeComponent,
-    RouterModule,
-  ],
+  //standalone: true,
+  // imports: [
+  //   HomeComponent,
+  //   RouterModule,
+  // ],
   template: `
     <main>
       <a [routerLink]="['/']">
