@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HousingService } from '../housing.service';
+import { HousingServiceForAll } from '../housing.service';
 import { HomeRepository } from './state/home.repository';
 
 @Component({
@@ -23,7 +23,7 @@ import { HomeRepository } from './state/home.repository';
 })
 export class HomeComponent {  
   constructor(
-    private housingService: HousingService,
+    private housingService: HousingServiceForAll,
     public repo: HomeRepository
   ) {}
 

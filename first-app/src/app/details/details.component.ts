@@ -1,19 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { HousingService } from '../housing.service';
-import { HousingLocation } from '../housinglocation';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { HousingServiceForOne as HousingService} from '../housing.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DetailsRepository } from './state/details.repository';
 
 @Component({
   selector: 'app-details',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
   template: `
-    <article>
+    <article *ngIf="repo.housingLocation$ | async as housingLocation">
       <img class="listing-photo" [src]="housingLocation?.photo"
         alt="Exterior photo of {{housingLocation?.name}}"/>
       <section class="listing-description">
@@ -47,10 +41,15 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent {
-  
+  constructor(
+    private housingService: HousingService,
+    public repo: DetailsRepository
+  ) {}
   route: ActivatedRoute = inject(ActivatedRoute);
-  housingService = inject(HousingService);
-  housingLocation: HousingLocation | undefined;
+
+  ngOnInit() {
+    this.housingService.getHousingLocationById(Number(this.route.snapshot.params['id'])).subscribe()
+;  }
   
   applyForm = new FormGroup({
     firstName: new FormControl(''),
@@ -58,13 +57,7 @@ export class DetailsComponent {
     email: new FormControl('')
   });
 
-  constructor() {
-    const housingLocationId = Number(this.route.snapshot.params['id']);
-  this.housingService.getHousingLocationById(housingLocationId).then(housingLocation => {
-      this.housingLocation = housingLocation;
-    });
-  }
-
+  
   submitApplication() {
     this.housingService.submitApplication(
       this.applyForm.value.firstName ?? '',

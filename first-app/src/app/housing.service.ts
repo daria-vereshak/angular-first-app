@@ -3,11 +3,12 @@ import { HousingLocation } from './housinglocation';
 import { HomeRepository } from './home/state/home.repository';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { DetailsRepository } from './details/state/details.repository';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HousingService {
+export class HousingServiceForAll {
   constructor(private http: HttpClient, private repo: HomeRepository) { }
 
   url = 'http://localhost:3000/locations';
@@ -23,20 +24,25 @@ export class HousingService {
         })
       );
   }
-  // getHousingLocationById(id: number) {
-  //   return this.http
-  //     .get<HousingLocation>(
-  //       `${this.url}/${id}`
-  //     )
-  //     .pipe(
-  //       tap((housingLocation))
-  //     )
-  // }
+}
+@Injectable({
+  providedIn: 'root'
+})
+export class HousingServiceForOne {
+  constructor(private http: HttpClient, private repo: DetailsRepository) { }
 
-  
-  async getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
-    const data = await fetch(`${this.url}/${id}`);
-    return await data.json() ?? {};
+  url = 'http://localhost:3000/locations';
+
+  getHousingLocationById(id: number) {
+    return this.http
+      .get<HousingLocation>(
+        `${this.url}/${id}`
+      )
+      .pipe(
+        tap((housingLocation) => {
+          this.repo.setHousingLocation(housingLocation || null);
+        })
+      )
   }
 
   submitApplication(firstName: string, lastName: string, email: string) {
